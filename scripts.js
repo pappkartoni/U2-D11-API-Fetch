@@ -2,7 +2,7 @@ const searchAndFill = (searchQuery, rowId) => {
     fetch("https://striveschool-api.herokuapp.com/api/deezer/search?q=" + searchQuery, {
         method: 'GET',
         headers: {
-          'X-RapidAPI-Key': '1fd0bc5ccfmshf2b04cf36ba473ap157883jsnb65aff44a460',
+          'X-RapidAPI-Key': '',
           'X-RapidAPI-Host': 'deezerdevs-deezer.p.rapidapi.com'
         }
     })

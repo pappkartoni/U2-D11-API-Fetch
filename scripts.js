@@ -1,3 +1,5 @@
+const uniqueAlbums = []; 
+
 const searchAndFill = (searchQuery, rowId) => {
     fetch("https://striveschool-api.herokuapp.com/api/deezer/search?q=" + searchQuery, {
         method: 'GET',
@@ -8,8 +10,12 @@ const searchAndFill = (searchQuery, rowId) => {
     })
     .then(query => query.json())
 	.then(json => {
+        console.log(json)
         let row = document.getElementById(rowId);
         for (let d of json.data) {
+            if (!uniqueAlbums.includes(d.album.id)) {
+                uniqueAlbums.push(d.album.id);
+            }
             row.innerHTML += `<div class="col">
                                 <div class="card my-2">
                                     <img src="${d.album.cover}" class="card-img-top" alt="...">
@@ -25,13 +31,13 @@ const searchAndFill = (searchQuery, rowId) => {
 };
 
 const countAlbums = function() {
-    let albums = document.querySelectorAll(".card img");
-    let uniqueAlbums = [];
+    /* let albums = document.querySelectorAll(".card img");
+    let uniques = [];
     for (let a of albums) {
-        if (!uniqueAlbums.includes(a.src)) {
-            uniqueAlbums.push(a.src);
+        if (!uniques.includes(a.src)) {
+            uniques.push(a.src);
         }
-    }
+    } */
     console.log(`There are ${uniqueAlbums.length} unique albums on this page.`);
 }
 
@@ -51,4 +57,7 @@ window.addEventListener("DOMContentLoaded", function() {
     searchAndFill("mf doom", "row1");
     searchAndFill("devin the dude", "row2");
     searchAndFill("masta ace", "row3");
+/*     searchAndFill("pink floyd", "row1");
+    searchAndFill("metallica", "row2");
+    searchAndFill("daft punk", "row3"); */
 });
